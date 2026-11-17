@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="185 25 730 730" width="730" height="730" role="img" aria-label="ООО «Альфа»"><title>ООО «Альфа»</title>
+<defs>
+<linearGradient id="logo-m-af" x1="0" y1="33" x2="0" y2="440" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffa63a"/><stop offset=".4" stop-color="#f7762a"/><stop offset="1" stop-color="#d9311d"/></linearGradient>
+<linearGradient id="logo-m-ar" x1="312" y1="0" x2="788" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#d63a1e"/><stop offset=".5" stop-color="#a51f19"/><stop offset="1" stop-color="#741615"/></linearGradient>
+<linearGradient id="logo-m-ap" x1="380" y1="330" x2="700" y2="700" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c8291b"/><stop offset=".55" stop-color="#7e1a18"/><stop offset="1" stop-color="#4e1216"/></linearGradient>
+<linearGradient id="logo-m-aa" x1="0" y1="350" x2="0" y2="592" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff5e8"/><stop offset="1" stop-color="#ecc69c"/></linearGradient>
+<linearGradient id="logo-m-ah" x1="546" y1="272" x2="320" y2="432" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff9a3c"/><stop offset=".7" stop-color="#ff8a34" stop-opacity=".8"/><stop offset="1" stop-color="#ff8a34" stop-opacity="0"/></linearGradient>
+</defs>
+<path fill="url(#logo-m-af)" d="M364 318C366 262 392 222 440 180C488 140 518 100 506 33C560 70 620 130 619 200C618 230 617 245 622 256C624 225 645 198 678 182C666 205 664 240 690 272C715 300 750 318 782 336L770 420L550 600L330 420L316 380C316 350 322 326 332 312C336 300 340 292 344 284C352 296 358 306 364 318Z"/>
+<path fill="url(#logo-m-ar)" d="M549 266L779 334C785 360 788 398 788 430C789 580 710 690 550 746C390 690 311 580 312 430C312 398 315 360 321 334Z"/>
+<path fill="none" stroke="url(#logo-m-ah)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M546 282L338 343C332 368 329 400 328 432"/>
+<path fill="#3d0c11" d="M549 298L753 356C757 380 759 410 758 440C757 562 690 657 550 714C410 657 343 562 342 440C341 410 343 380 347 356Z"/>
+<path fill="url(#logo-m-ap)" d="M549 309L744 362C748 384 750 412 749 440C748 555 684 645 550 701C416 645 352 555 351 440C350 412 352 384 356 362Z"/>
+<path fill="url(#logo-m-aa)" stroke="#3a0b0f" stroke-width="10" stroke-linejoin="round" paint-order="stroke" fill-rule="evenodd" d="M521 350H578L673 592H618L604 557H492L478 592H424ZM548 412L508 514H588Z"/>
+</svg>

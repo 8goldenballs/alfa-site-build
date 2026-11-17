@@ -1,0 +1,58 @@
+# Конфигурация Apache для сайта ООО «Альфа»
+# Источник правил: web/SECURITY.md (Sec10, Sec15), web/SEARCH.md (SEO7)
+
+# --- SEO7: несуществующий адрес отдаёт настоящий код 404 со своей страницей
+ErrorDocument 404 /404.html
+
+# --- Sec10: заголовки безопасности
+# Полная политика безопасности живёт в мета-теге сборки. Сюда — только
+# frame-ancestors: мета-тег её не поддерживает (Sec11). Не дублировать
+# политику целиком — браузер применит пересечение двух политик.
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set X-XSS-Protection "0"
+  Header always set Content-Security-Policy "frame-ancestors 'none'; script-src 'self'; connect-src 'self'; frame-src 'none'"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+# --- Sec15, Sec14: служебные файлы и карты исходников недоступны
+<FilesMatch "^\.(env|git|htaccess)|\.(log|bak|json|lock|md|map)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+Options -Indexes
+
+# --- Sec12: защищённое соединение. НЕ ВКЛЮЧАТЬ ДО БОЕВОГО ДОМЕНА.
+# Порядок строго: сертификат выпущен и активен -> перенаправление на HTTPS
+# -> HSTS с малым сроком -> наращивать. Обратный порядок делает сайт
+# недоступным. Включается на шаге выкладки, не сейчас.
+
+# --- Зеркала и защищённое соединение. ВЫКЛЮЧЕНО: включить, когда сертификат
+# выпущен на все четыре имени — alfa-astrakhan.ru, www.alfa-astrakhan.ru,
+# альфа-астрахань.рф, www.альфа-астрахань.рф. Без сертификата на зеркало
+# переход по https://зеркало браузер оборвёт раньше переадресации.
+# Порядок и проверки — отчёты/переадресации.md (задача 48).
+#
+# Хосты названы явно, а не «всё, что не основной домен»: иначе закрытая
+# копия для показа на техническом адресе Timeweb уедет на боевой домен.
+# Кириллический домен — только в punycode (справка Timeweb «Типовые
+# перенаправления»). Каждый запрос — не больше одного шага переадресации.
+# Без <IfModule>: выключенный модуль даст ошибку при проверке, а не тишину.
+#
+# 1. Зеркало и www — на основной домен, сразу на https
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} ^www\.alfa-astrakhan\.ru$ [NC,OR]
+# RewriteCond %{HTTP_HOST} ^(www\.)?xn----7sbabaa6evayjltu3gl\.xn--p1ai$ [NC]
+# RewriteRule ^(.*)$ https://alfa-astrakhan.ru/$1 [R=301,L]
+#
+# 2. http -> https на основном домене. Apache стоит за nginx Timeweb и сам
+# всегда видит http; признак https — заголовок X-HTTPS, а не %{HTTPS}
+# ⟨10.2026⟩. Если заголовка нет, правило зациклится: после включения
+# https://alfa-astrakhan.ru/ обязан отвечать 200, а не 301
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} ^alfa-astrakhan\.ru$ [NC]
+# RewriteCond %{HTTP:X-HTTPS} !1
+# RewriteRule ^(.*)$ https://alfa-astrakhan.ru/$1 [R=301,L]
